@@ -50,6 +50,9 @@ router.get('/:id', (req, res) => {
       'stock',
       'category_id'
     ],
+    where: {
+      id: req.params.id
+    },
     include: [
       {
         model: Category,
@@ -163,18 +166,20 @@ router.delete('/:id', (req, res) => {
   Product.destroy({
     where: {
       id: req.params.id
-    })
-    .then(dbProductData => {
-      if(!dbProductData) {
-        res.status(404).json({message: 'No product found with this id'})
-        return;
-      }
-      res.status(200).json(dbProductData)
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err)
-    })
+    }
+  })
+  .then((dbProductData) => {
+    if(!dbProductData) {
+      res.status(404).json({message: 'No product found with this ID.'})
+      return;
+    }
+    res.status(200).json(dbProductData)
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err)
+  })
 });
+
 
 module.exports = router;

@@ -24,7 +24,8 @@ router.get('/:id', (req, res) => {
   // include associated Product data
   Tag.findOne({
     attributes: [
-      'id', 'tag_name'
+      'id', 
+      'tag_name'
     ],
     where: {
       id: req.params.id
